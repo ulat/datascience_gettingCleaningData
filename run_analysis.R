@@ -1,10 +1,10 @@
 # importing the source txt-files into variables
-x_test <- read.table("UCI HAR Dataset/test/X_test.txt")
-y_test <- read.table("UCI HAR Dataset/test/y_test.txt")
-subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt")
-x_train <- read.table("UCI HAR Dataset/train/X_train.txt")
-y_train <- read.table("UCI HAR Dataset/train/y_train.txt")
-subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt")
+x_test <- read.table(file.path("UCI HAR Dataset", "test", "X_test.txt", fsep = .Platform$file.sep))
+y_test <- read.table(file.path("UCI HAR Dataset", "test", "y_test.txt", fsep = .Platform$file.sep))
+subject_test <- read.table(file.path("UCI HAR Dataset", "test", "subject_test.txt", fsep = .Platform$file.sep))
+x_train <- read.table(file.path("UCI HAR Dataset", "train", "X_train.txt", fsep = .Platform$file.sep))
+y_train <- read.table(file.path("UCI HAR Dataset", "train", "y_train.txt", fsep = .Platform$file.sep))
+subject_train <- read.table(file.path("UCI HAR Dataset", "train", "subject_train.txt", fsep = .Platform$file.sep))
 
 # combing the sourcefiles to one big rawData file
 testData <- cbind(subject_test, x_test, y_test)
@@ -12,13 +12,13 @@ trainData <- cbind(subject_train, x_train, y_train)
 rawData <- rbind(testData, trainData)
 
 # adding the factor names
-colNames <- read.table("UCI HAR Dataset/features.txt", stringsAsFactors=F)
+colNames <- read.table(file.path("UCI HAR Dataset", "features.txt", fsep = .Platform$file.sep), stringsAsFactors=F)
 colNames <- colNames[,2]
 colNames <- c("subject", colNames, "activity")
 colnames(rawData) <- colNames
 
 # reading the activities and adding factor names
-activities <- read.table("UCI HAR Dataset/activity_labels.txt", stringsAsFactors=F)
+activities <- read.table(file.path("UCI HAR Dataset", "activity_labels.txt", fsep = .Platform$file.sep), stringsAsFactors=F)
 colnames(activities) <- c("activity", "activity_descr")
 
 # merge rawData file and activity files together
