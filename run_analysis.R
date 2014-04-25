@@ -26,8 +26,8 @@ rawData <- merge(rawData, activities)
 
 # extracting the columns that contain mean() or std()
 # escaping the paranthesis
-meanCols <- grep("mean\\(\\)", names(rawData)) 
-stdCols <- grep("std\\(\\)", names(rawData))
+meanCols <- grep("mean\\(\\)", names(rawData), ignore.case=TRUE) 
+stdCols <- grep("std\\(\\)", names(rawData), ignore.case=TRUE)
 meanAndStdCols <- c(meanCols, stdCols)
 # adding the activities, activity descriptions and subjects to the cols
 meanAndStdActivityCols <- c(1, 564, 2, meanAndStdCols)
